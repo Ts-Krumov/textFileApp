@@ -1,6 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.util.Scanner;
 
 public class Main {
@@ -9,22 +7,26 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a file you want to open: ");
         String fileName = scanner.nextLine();
-
-        try {
-            FileReader fileToRead = new FileReader(fileName);
-            int data = fileToRead.read();
-                while (data != -1){
-                    System.out.print((char)data);
-                    data = fileToRead.read();
-                }
-                fileToRead.close();
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            scanner.close();
+        TextFile openedFile = new TextFile(fileName);
+        openedFile.readFile();
+        System.out.println("Choose a command: (swapLines/swapWords)");
+        String command = scanner.nextLine();
+        if(command.equals("swapLines")){
+            System.out.println("Enter index of lines to swap: ");
+            String line1 = scanner.nextLine();
+            String line2 = scanner.nextLine();
+            openedFile.swapLines(Integer.parseInt(line1), Integer.parseInt(line2));
+        }else  if(command.equals("swapWords")){
+            System.out.println("Enter index of lines to swap: ");
+            String line1 = scanner.nextLine();
+            String line2 = scanner.nextLine();
+            System.out.println("Enter index of words to swap: ");
+            String word1 = scanner.nextLine();
+            String word2 = scanner.nextLine();
+            openedFile.swapWords(Integer.parseInt(line1), Integer.parseInt(line2), Integer.parseInt(word1), Integer.parseInt(word2));
+        }else{
+                System.out.println("Not a valid command!");
+            }
+        openedFile.readFile();
         }
-
     }
-}
