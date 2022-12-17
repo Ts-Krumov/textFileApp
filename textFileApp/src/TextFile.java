@@ -64,8 +64,6 @@ public class TextFile {
         linesArray.set(firstLineIndex,String.join(" ", firstLine));
         linesArray.set(secondLineIndex,String.join(" ", secondLine));
         saveChange();
-        //string array to string HW
-        //try with resources
-        //bufferedwriter HW
+
     }
 }
